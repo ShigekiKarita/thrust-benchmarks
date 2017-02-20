@@ -38,7 +38,7 @@ def locate_cuda():
     cudaconfig = {'home':home, 'nvcc':nvcc,
                   'include': pjoin(home, 'include'),
                   'lib64': pjoin(home, 'lib64')}
-    for k, v in cudaconfig.iteritems():
+    for k, v in cudaconfig.items():
         if not os.path.exists(v):
             raise EnvironmentError('The CUDA %s path could not be located in %s' % (k, v))
 
@@ -57,6 +57,7 @@ ext = Extension('sort',
                     'nvcc': ['-arch=sm_20',
                              '--ptxas-options=-v',
                              '-c',
+                             "-std=c++11",
                              '--compiler-options',
                              "'-fPIC'"]},
                 include_dirs = [CUDA['include']])
